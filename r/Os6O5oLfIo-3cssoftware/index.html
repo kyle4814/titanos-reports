@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex,nofollow">
+<meta name="googlebot" content="noindex,nofollow">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Security Assessment Report — 3cssoftware.com.au</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, 'Helvetica Neue', Helvetica, Arial, sans-serif; background: #0f172a; color: #e2e8f0; line-height: 1.6; }
+  .container { max-width: 720px; margin: 0 auto; padding: 32px 16px; }
+  h1 { font-family: Georgia, 'Times New Roman', serif; font-size: 28px; color: #f8fafc; margin-bottom: 4px; }
+  h2 { font-family: Georgia, 'Times New Roman', serif; font-size: 20px; color: #f8fafc; margin: 36px 0 16px; border-bottom: 1px solid #334155; padding-bottom: 8px; }
+  h3 { font-size: 16px; color: #f8fafc; margin: 24px 0 12px; }
+  .subtitle { color: #94a3b8; font-size: 14px; margin-bottom: 32px; }
+  .meta { background: #1e293b; border-radius: 8px; padding: 16px; margin: 16px 0; font-size: 13px; color: #94a3b8; }
+  .meta strong { color: #e2e8f0; }
+  .score-card { background: #1e293b; border-radius: 12px; padding: 24px; margin: 24px 0; border: 1px solid #334155; }
+  .risk-score { font-size: 48px; font-weight: 700; text-align: center; }
+  .risk-label { text-align: center; font-size: 16px; font-weight: 600; margin-bottom: 12px; }
+  .severity-row { display: flex; justify-content: space-around; margin: 16px 0; }
+  .severity-item { text-align: center; }
+  .severity-count { font-size: 24px; font-weight: 700; }
+  .severity-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #94a3b8; }
+  .finding-card { background: #1e293b; border-radius: 8px; padding: 20px; margin: 16px 0; border-left: 4px solid; }
+  .finding-title { font-weight: 600; font-size: 15px; margin-bottom: 8px; }
+  .finding-detail { font-size: 14px; color: #cbd5e1; margin-bottom: 12px; }
+  .finding-fix { font-size: 14px; color: #a5f3fc; background: #0c1a2e; padding: 12px; border-radius: 6px; border-left: 3px solid #06b6d4; }
+  .finding-fix strong { color: #22d3ee; }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+  .port-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 13px; }
+  .port-table th { background: #1e293b; padding: 8px 12px; text-align: left; color: #94a3b8; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; }
+  .port-table td { padding: 8px 12px; border-bottom: 1px solid #1e293b; }
+  .subdomain-list { font-size: 13px; color: #94a3b8; column-count: 2; column-gap: 24px; margin: 12px 0; }
+  .subdomain-list li { margin: 2px 0; }
+  .section-summary { background: #1e293b; border-radius: 8px; padding: 16px; margin: 16px 0; font-size: 14px; }
+  .footer { text-align: center; color: #475569; font-size: 12px; margin-top: 48px; padding-top: 20px; border-top: 1px solid #1e293b; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Security Assessment Report</h1>
+  <p class="subtitle">3cssoftware.com.au</p>
+
+  <div class="meta">
+    <strong>Scan Date:</strong> 2026-04-21<br>
+    <strong>Target IP:</strong> 23.101.208.52<br>
+    <strong>Scan ID:</strong> abef54af5549<br>
+    <strong>Duration:</strong> 98.3s<br>
+    <strong>Method:</strong> Passive reconnaissance + banner grab (no exploitation, no auth testing)
+  </div>
+
+  <div class="score-card">
+    <div class="risk-label" style="color: #ea580c">OVERALL RISK</div>
+    <div class="risk-score" style="color: #ea580c">C</div>
+    <div class="severity-row">
+      <div class="severity-item">
+        <div class="severity-count" style="color: #dc2626">0</div>
+        <div class="severity-label">Critical</div>
+      </div>
+      <div class="severity-item">
+        <div class="severity-count" style="color: #ea580c">2</div>
+        <div class="severity-label">High</div>
+      </div>
+      <div class="severity-item">
+        <div class="severity-count" style="color: #ca8a04">44</div>
+        <div class="severity-label">Medium</div>
+      </div>
+      <div class="severity-item">
+        <div class="severity-count" style="color: #2563eb">7</div>
+        <div class="severity-label">Low</div>
+      </div>
+    </div>
+  </div>
+
+  <h2>Executive Summary</h2>
+  <div class="section-summary">
+    A passive security assessment of <strong>3cssoftware.com.au</strong> (23.101.208.52) revealed <strong>53 findings</strong> across 5 open ports and 61 subdomains. Overall risk grade: <strong style='color: #ea580c'>C</strong>.<br><br><strong>2 high-severity issues</strong> were found that should be addressed within the next 7 days. 44 medium-severity findings were noted for near-term remediation. 7 low-severity items represent best-practice improvements.
+  </div>
+  <h2>Findings</h2>
+
+  <div class="finding-card" style="border-color: #ea580c">
+    <div class="finding-title">
+      <span class="badge" style="background: #ea580c; color: #fff;">HIGH</span>
+      Missing HSTS
+    </div>
+    <div class="finding-detail">Missing HSTS — allows SSL stripping attacks</div>
+    <div class="finding-fix">
+      <strong>Remediation:</strong> Add &#x27;Strict-Transport-Security&#x27; header to server response.
+    </div>
+  </div>
+
+  <div class="finding-card" style="border-color: #ea580c">
+    <div class="finding-title">
+      <span class="badge" style="background: #ea580c; color: #fff;">HIGH</span>
+      Port 21/tcp (FTP) Open
+    </div>
+    <div class="finding-detail">FTP exposed — cleartext credentials, anonymous access risk. Detected service: ftp.</div>
+    <div class="finding-fix">
+      <strong>Remediation:</strong> Close port 21 or restrict access to trusted IPs via firewall. If required, ensure FTP is patched and properly authenticated.
+    </div>
+  </div>
+
+  <div class="finding-card" style="border-color: #ca8a04">
+    <div class="finding-title">
+      <span class="badge" style="background: #ca8a04; color: #fff;">MEDIUM</span>
+      Sensitive subdomain: bgh-staging.3cssoftware.com.au
+    </div>
+    <div class="finding-detail">Subdomain &#x27;bgh-staging.3cssoftware.com.au&#x27; suggests internal/dev/admin infrastructure exposed via DNS. Attackers enumerate these first.</div>
+    <div class="finding-fix">
+      <strong>Remediation:</strong> Remove DNS record if service is internal-only, or restrict access via firewall/VPN.
+    </div>
+  </div>
+
+  <div class="finding-card" style="border-color: #ca8a04">
+    <div class="finding-title">
+      <span class="badge" style="background: #ca8a04; color: #fff;">MEDIUM</span>
+      Sensitive subdomain: admin.dev.hyne.3cssoftware.com.au
+    </div>
+    <div class="finding-detail">Subdomain &#x27;admin.dev.hyne.3cssoftware.com.au&#x27; suggests internal/dev/admin infrastructure exposed via DNS. Attackers enumerate these first.</div>
+    <div class="finding-fix">
+      <strong>Remediation:</strong> Remove DNS record if service is internal-only, or restrict access via firewall/VPN.
+    </div>
+  </div>
+
+  <div class="finding-card" style="border-color: #ca8a04">
+    <div class="finding-title">
+      <span class="badge" style="background: #ca8a04; color: #fff;">MEDIUM</span>
+      Sensitive subdomain: app.dev.mibo-riskregister.3cssoftware.com.au
+    </div>
+    <div class="finding-detail">Subdomain &#x27;app.dev.mibo-riskregister.3cssoftware.com.au&#x27; suggests internal/dev/admin infrastructure exposed via DNS. Attackers enumerate these first.</div>
+    <div class="finding-fix">
+      <strong>Remediation:</strong> Remove DNS record if service is internal-only, or restrict access via firewall/VPN.
+    </div>
+  </div>
+
+  <div class="finding-card" style="border-color: #ca8a04">
+    <div class="finding-title">
+      <span class="badge" style="background: #ca8a04; color: #fff;">MEDIUM</span>
+      Sensitive subdomain: admin.deswik-website.3cssoftware.com.au
+    </div>
+    <div class="finding-detail">Subdomain &#x27;admin.deswik-website.3cssoftware.com.au&#x27; suggests internal/dev/admin infrastructure exposed via DNS. Attackers enumerate these first.</div>
+    <div class="finding-fix">
+      <strong>Remediation:</strong> Remove DNS record if service is internal-only, or restrict access via firewall/VPN.
+    </div>
+  </div>
+
+  <div class="finding-card" style="border-color: #ca8a04">
+    <div class="finding-title">
+      <span class="badge" style="background: #ca8a04; color: #fff;">MEDIUM</span>
+      Sensitive subdomain: api.dev.deswik-conference.3cssoftware.com.au
+    </div>
+    <div class="finding-detail">Subdomain &#x27;api.dev.deswik-conference.3cssoftware.com.au&#x27; suggests internal/dev/admin infrastructure exposed via DNS. Attackers enumerate these first.</div>
+    <div class="finding-fix">
+      <strong>Remediation:</strong> Remove DNS record if service is internal-only, or restrict access via firewall/VPN.
+    </div>
+  </div>
+
+  <div class="finding-card" style="border-color: #ca8a04">
+    <div class="finding-title">
+      <span class="badge" style="background: #ca8a04; color: #fff;">MEDIUM</span>
+      Sensitive subdomain: admin.bgh.3cssoftware.com.au
+    </div>
+    <div class="finding-detail">Subdomain &#x27;admin.bgh.3cssoftware.com.au&#x27; suggests internal/dev/admin infrastructure exposed via DNS. Attackers enumerate these first.</div>
+    <div class="finding-fix">
+      <strong>Remediation:</strong> Remove DNS record if service is internal-only, or restrict access via firewall/VPN.
+    </div>
+  </div>
+
+  <div class="finding-card" style="border-color: #ca8a04">
+    <div class="finding-title">
+      <span class="badge" style="background: #ca8a04; color: #fff;">MEDIUM</span>
+      Sensitive subdomain: auth.dev.mykidsvision.3cssoftware.com.au
+    </div>
+    <div class="finding-detail">Subdomain &#x27;auth.dev.mykidsvision.3cssoftware.com.au&#x27; suggests internal/dev/admin infrastructure exposed via DNS. Attackers enumerate these first.</div>
+    <div class="finding-fix">
+      <strong>Remediation:</strong> Remove DNS record if service is internal-only, or restrict access via firewall/VPN.
+    </div>
+  </div>
+
+  <div class="finding-card" style="border-color: #ca8a04">
+    <div class="finding-title">
+      <span class="badge" style="background: #ca8a04; color: #fff;">MEDIUM</span>
+      Sensitive subdomain: admin.dev.deswik-website.3cssoftware.com.au
+    </div>
+    <div class="finding-detail">Subdomain &#x27;admin.dev.deswik-website.3cssoftware.com.au&#x27; suggests internal/dev/admin infrastructure exposed via DNS. Attackers enumerate these first.</div>
+    <div class="finding-fix">
+      <strong>Remediation:</strong> Remove DNS record if service is internal-only, or restrict access via firewall/VPN.
+    </div>
+  </div>
+
+  <div class="finding-card" style="border-color: #ca8a04">
+    <div class="finding-title">
+      <span class="badge" style="background: #ca8a04; color: #fff;">MEDIUM</span>
+      Sensitive subdomain: api.dev-aws.ct.menicon.3cssoftware.com.au
+    </div>
+    <div class="finding-detail">Subdomain &#x27;api.dev-aws.ct.menicon.3cssoftware.com.au&#x27; suggests internal/dev/admin infrastructure exposed via DNS. Attackers enumerate these first.</div>
+    <div class="finding-fix">
+      <strong>Remediation:</strong> Remove DNS record if service is internal-only, or restrict access via firewall/VPN.
+    </div>
+  </div>
+
+  <div class="finding-card" style="border-color: #ca8a04">
+    <div class="finding-title">
+      <span class="badge" style="background: #ca8a04; color: #fff;">MEDIUM</span>
+      Sensitive subdomain: auth.dev-aws.ct.menicon.3cssoftware.com.au
+    </div>
+    <div class="finding-detail">Subdomain &#x27;auth.dev-aws.ct.menicon.3cssoftware.com.au&#x27; suggests internal/dev/admin infrastructure exposed via DNS. Attackers enumerate these first.</div>
+    <div class="finding-fix">
+      <strong>Remediation:</strong> Remove DNS record if service is internal-only, or restrict access via firewall/VPN.
+    </div>
+  </div>
+
+  <div class="finding-card" style="border-color: #ca8a04">
+    <div class="finding-title">
+      <span class="badge" style="background: #ca8a04; color: #fff;">MEDIUM</span>
+      Sensitive subdomain: auth.dev.ct.menicon.3cssoftware.com.au
+    </div>
+    <div class="finding-detail">Subdomain &#x27;auth.dev.ct.menicon.3cssoftware.com.au&#x27; suggests internal/dev/admin infrastructure exposed via DNS. Attackers enumerate these first.</div>
+    <div class="finding-fix">
+      <strong>Remediation:</strong> Remove DNS record if service is internal-only, or restrict access via firewall/VPN.
+    </div>
+  </div>
+
+  <div class="finding-card" style="border-color: #ca8a04">
+    <div class="finding-title">
+      <span class="badge" style="background: #ca8a04; color: #fff;">MEDIUM</span>
+      Sensitive subdomain: mailer.dev-aws.ct.menicon.3cssoftware.com.au
+    </div>
+    <div class="finding-detail">Subdomain &#x27;mailer.dev-aws.ct.menicon.3cssoftware.com.au&#x27; suggests internal/dev/admin infrastructure exposed via DNS. Attackers enumerate these first.</div>
+    <div class="finding-fix">
+      <strong>Remediation:</strong> Remove DNS record if service is internal-only, or restrict access via firewall/VPN.
+    </div>
+  </div>
+
+  <div class="finding-card" style="border-color: #ca8a04">
+    <div class="finding-title">
+      <span class="badge" style="background: #ca8a04; color: #fff;">MEDIUM</span>
+      Sensitive subdomain: api.dev.mykidsvision.3cssoftware.com.au
+    </div>
+    <div class="finding-detail">Subdomain &#x27;api.dev.mykidsvision.3cssoftware.com.au&#x27; suggests internal/dev/admin infrastructure exposed via DNS. Attackers enumerate these first.</div>
+    <div class="finding-fix">
+      <strong>Remediation:</strong> Remove DNS record if service is internal-only, or restrict access via firewall/VPN.
+    </div>
+  </div>
+
+  <div class="finding-card" style="border-color: #ca8a04">
+    <div class="finding-title">
+      <span class="badge" style="background: #ca8a04; color: #fff;">MEDIUM</span>
+      Sensitive subdomain: bgh-prod-admin.3cssoftware.com.au
+    </div>
+    <div class="finding-detail">Subdomain &#x27;bgh-prod-admin.3cssoftware.com.au&#x27; suggests internal/dev/admin infrastructure exposed via DNS. Attackers enumerate these first.</div>
+    <div class="finding-fix">
+      <strong>Remediation:</strong> Remove DNS record if service is internal-only, or restrict access via firewall/VPN.
+    </div>
+  </div>
+
+  <div class="finding-card" style="border-color: #ca8a04">
+    <div class="finding-title">
+      <span class="badge" style="background: #ca8a04; color: #fff;">MEDIUM</span>
+      Sensitive subdomain: mailer.dev.ct.menicon.3cssoftware.com.au
+    </div>
+    <div class="finding-detail">Subdomain &#x27;mailer.dev.ct.menicon.3cssoftware.com.au&#x27; suggests internal/dev/admin infrastructure exposed via DNS. Attackers enumerate these first.</div>
+    <div class="finding-fix">
+      <strong>Remediation:</strong> Remove DNS record if service is internal-only, or restrict access via firewall/VPN.
+    </div>
+  </div>
+
+  <div class="finding-card" style="border-color: #ca8a04">
+    <div class="finding-title">
+      <span class="badge" style="background: #ca8a04; color: #fff;">MEDIUM</span>
+      Sensitive subdomain: admin.dev.knocknock.3cssoftware.com.au
+    </div>
+    <div class="finding-detail">Subdomain &#x27;admin.dev.knocknock.3cssoftware.com.au&#x27; suggests internal/dev/admin infrastructure exposed via DNS. Attackers enumerate these first.</div>
+    <div class="finding-fix">
+      <strong>Remediation:</strong> Remove DNS record if service is internal-only, or restrict access via firewall/VPN.
+    </div>
+  </div>
+
+  <div class="finding-card" style="border-color: #ca8a04">
+    <div class="finding-title">
+      <span class="badge" style="background: #ca8a04; color: #fff;">MEDIUM</span>
+      Sensitive subdomain: public.dev.mykidsvision.3cssoftware.com.au
+    </div>
+    <div class="finding-detail">Subdomain &#x27;public.dev.mykidsvision.3cssoftware.com.au&#x27; suggests internal/dev/admin infrastructure exposed via DNS. Attackers enumerate these first.</div>
+    <div class="finding-fix">
+      <strong>Remediation:</strong> Remove DNS record if service is internal-only, or restrict access via firewall/VPN.
+    </div>
+  </div>
+
+  <div class="finding-card" style="border-color: #ca8a04">
+    <div class="finding-title">
+      <span class="badge" style="background: #ca8a04; color: #fff;">MEDIUM</span>
+      Sensitive subdomain: bgh-admin-prod.3cssoftware.com.au
+    </div>
+    <div class="finding-detail">Subdomain &#x27;bgh-admin-prod.3cssoftware.com.au&#x27; suggests internal/dev/admin infrastructure exposed via DNS. Attackers enumerate these first.</div>
+    <div class="finding-fix">
+      <strong>Remediation:</strong> Remove DNS record if service is internal-only, or restrict access via firewall/VPN.
+    </div>
+  </div>
+
+  <div class="finding-card" style="border-color: #ca8a04">
+    <div class="finding-title">
+      <span class="badge" style="background: #ca8a04; color: #fff;">MEDIUM</span>
+      Sensitive subdomain: app.dev.knocknock.3cssoftware.com.au
+    </div>
+    <div class="finding-detail">Subdomain &#x27;app.dev.knocknock.3cssoftware.com.au&#x27; suggests internal/dev/admin infrastructure exposed via DNS. Attackers enumerate these first.</div>
+    <div class="finding-fix">
+      <strong>Remediation:</strong> Remove DNS record if service is internal-only, or restrict access via firewall/VPN.
+    </div>
+  </div>
+
+  <div class="finding-card" style="border-color: #ca8a04">
+    <div class="finding-title">
+      <span class="badge" style="background: #ca8a04; color: #fff;">MEDIUM</span>
+      Sensitive subdomain: mailer.dev.mykidsvision.3cssoftware.com.au
+    </div>
+    <div class="finding-detail">Subdomain &#x27;mailer.dev.mykidsvision.3cssoftware.com.au&#x27; suggests internal/dev/admin infrastructure exposed via DNS. Attackers enumerate these first.</div>
+    <div class="finding-fix">
+      <strong>Remediation:</strong> Remove DNS record if service is internal-only, or restrict access via firewall/VPN.
+    </div>
+  </div>
+
+  <div class="finding-card" style="border-color: #ca8a04">
+    <div class="finding-title">
+      <span class="badge" style="background: #ca8a04; color: #fff;">MEDIUM</span>
+      Sensitive subdomain: admin.hyne.3cssoftware.com.au
+    </div>
+    <div class="finding-detail">Subdomain &#x27;admin.hyne.3cssoftware.com.au&#x27; suggests internal/dev/admin infrastructure exposed via DNS. Attackers enumerate these first.</div>
+    <div class="finding-fix">
+      <strong>Remediation:</strong> Remove DNS record if service is internal-only, or restrict access via firewall/VPN.
+    </div>
+  </div>
+
+  <div class="finding-card" style="border-color: #ca8a04">
+    <div class="finding-title">
+      <span class="badge" style="background: #ca8a04; color: #fff;">MEDIUM</span>
+      Sensitive subdomain: admin.dev.qco-riskmanager.3cssoftware.com.au
+    </div>
+    <div class="finding-detail">Subdomain &#x27;admin.dev.qco-riskmanager.3cssoftware.com.au&#x27; suggests internal/dev/admin infrastructure exposed via DNS. Attackers enumerate these first.</div>
+    <div class="finding-fix">
+      <strong>Remediation:</strong> Remove DNS record if service is internal-only, or restrict access via firewall/VPN.
+    </div>
+  </div>
+
+  <div class="finding-card" style="border-color: #ca8a04">
+    <div class="finding-title">
+      <span class="badge" style="background: #ca8a04; color: #fff;">MEDIUM</span>
+      Sensitive subdomain: app.dev.jbu.3cssoftware.com.au
+    </div>
+    <div class="finding-detail">Subdomain &#x27;app.dev.jbu.3cssoftware.com.au&#x27; suggests internal/dev/admin infrastructure exposed via DNS. Attackers enumerate these first.</div>
+    <div class="finding-fix">
+      <strong>Remediation:</strong> Remove DNS record if service is internal-only, or restrict access via firewall/VPN.
+    </div>
+  </div>
+
+  <div class="finding-card" style="border-color: #ca8a04">
+    <div class="finding-title">
+      <span class="badge" style="background: #ca8a04; color: #fff;">MEDIUM</span>
+      Sensitive subdomain: api.mobile.dev.deswik-conference.3cssoftware.com.au
+    </div>
+    <div class="finding-detail">Subdomain &#x27;api.mobile.dev.deswik-conference.3cssoftware.com.au&#x27; suggests internal/dev/admin infrastructure exposed via DNS. Attackers enumerate these first.</div>
+    <div class="finding-fix">
+      <strong>Remediation:</strong> Remove DNS record if service is internal-only, or restrict access via firewall/VPN.
+    </div>
+  </div>
+
+  <div class="finding-card" style="border-color: #ca8a04">
+    <div class="finding-title">
+      <span class="badge" style="background: #ca8a04; color: #fff;">MEDIUM</span>
+      Sensitive subdomain: dev.mykidsvision.3cssoftware.com.au
+    </div>
+    <div class="finding-detail">Subdomain &#x27;dev.mykidsvision.3cssoftware.com.au&#x27; suggests internal/dev/admin infrastructure exposed via DNS. Attackers enumerate these first.</div>
+    <div class="finding-fix">
+      <strong>Remediation:</strong> Remove DNS record if service is internal-only, or restrict access via firewall/VPN.
+    </div>
+  </div>
+
+  <div class="finding-card" style="border-color: #ca8a04">
+    <div class="finding-title">
+      <span class="badge" style="background: #ca8a04; color: #fff;">MEDIUM</span>
+      Sensitive subdomain: bgh-admin-staging.3cssoftware.com.au
+    </div>
+    <div class="finding-detail">Subdomain &#x27;bgh-admin-staging.3cssoftware.com.au&#x27; suggests internal/dev/admin infrastructure exposed via DNS. Attackers enumerate these first.</div>
+    <div class="finding-fix">
+      <strong>Remediation:</strong> Remove DNS record if service is internal-only, or restrict access via firewall/VPN.
+    </div>
+  </div>
+
+  <div class="finding-card" style="border-color: #ca8a04">
+    <div class="finding-title">
+      <span class="badge" style="background: #ca8a04; color: #fff;">MEDIUM</span>
+      Sensitive subdomain: api.dev.ct.menicon.3cssoftware.com.au
+    </div>
+    <div class="finding-detail">Subdomain &#x27;api.dev.ct.menicon.3cssoftware.com.au&#x27; suggests internal/dev/admin infrastructure exposed via DNS. Attackers enumerate these first.</div>
+    <div class="finding-fix">
+      <strong>Remediation:</strong> Remove DNS record if service is internal-only, or restrict access via firewall/VPN.
+    </div>
+  </div>
+
+  <div class="finding-card" style="border-color: #ca8a04">
+    <div class="finding-title">
+      <span class="badge" style="background: #ca8a04; color: #fff;">MEDIUM</span>
+      Sensitive subdomain: dev.ct.menicon.3cssoftware.com.au
+    </div>
+    <div class="finding-detail">Subdomain &#x27;dev.ct.menicon.3cssoftware.com.au&#x27; suggests internal/dev/admin infrastructure exposed via DNS. Attackers enumerate these first.</div>
+    <div class="finding-fix">
+      <strong>Remediation:</strong> Remove DNS record if service is internal-only, or restrict access via firewall/VPN.
+    </div>
+  </div>
+
+  <div class="finding-card" style="border-color: #ca8a04">
+    <div class="finding-title">
+      <span class="badge" style="background: #ca8a04; color: #fff;">MEDIUM</span>
+      Sensitive subdomain: app.dev.witzer.3cssoftware.com.au
+    </div>
+    <div class="finding-detail">Subdomain &#x27;app.dev.witzer.3cssoftware.com.au&#x27; suggests internal/dev/admin infrastructure exposed via DNS. Attackers enumerate these first.</div>
+    <div class="finding-fix">
+      <strong>Remediation:</strong> Remove DNS record if service is internal-only, or restrict access via firewall/VPN.
+    </div>
+  </div>
+
+  <div class="finding-card" style="border-color: #ca8a04">
+    <div class="finding-title">
+      <span class="badge" style="background: #ca8a04; color: #fff;">MEDIUM</span>
+      Sensitive subdomain: auth.dev.deswik-conference.3cssoftware.com.au
+    </div>
+    <div class="finding-detail">Subdomain &#x27;auth.dev.deswik-conference.3cssoftware.com.au&#x27; suggests internal/dev/admin infrastructure exposed via DNS. Attackers enumerate these first.</div>
+    <div class="finding-fix">
+      <strong>Remediation:</strong> Remove DNS record if service is internal-only, or restrict access via firewall/VPN.
+    </div>
+  </div>
+
+  <div class="finding-card" style="border-color: #ca8a04">
+    <div class="finding-title">
+      <span class="badge" style="background: #ca8a04; color: #fff;">MEDIUM</span>
+      Sensitive subdomain: app.dev.qco-riskmanager.3cssoftware.com.au
+    </div>
+    <div class="finding-detail">Subdomain &#x27;app.dev.qco-riskmanager.3cssoftware.com.au&#x27; suggests internal/dev/admin infrastructure exposed via DNS. Attackers enumerate these first.</div>
+    <div class="finding-fix">
+      <strong>Remediation:</strong> Remove DNS record if service is internal-only, or restrict access via firewall/VPN.
+    </div>
+  </div>
+
+  <div class="finding-card" style="border-color: #ca8a04">
+    <div class="finding-title">
+      <span class="badge" style="background: #ca8a04; color: #fff;">MEDIUM</span>
+      Sensitive subdomain: app.dev.hyne.3cssoftware.com.au
+    </div>
+    <div class="finding-detail">Subdomain &#x27;app.dev.hyne.3cssoftware.com.au&#x27; suggests internal/dev/admin infrastructure exposed via DNS. Attackers enumerate these first.</div>
+    <div class="finding-fix">
+      <strong>Remediation:</strong> Remove DNS record if service is internal-only, or restrict access via firewall/VPN.
+    </div>
+  </div>
+
+  <div class="finding-card" style="border-color: #ca8a04">
+    <div class="finding-title">
+      <span class="badge" style="background: #ca8a04; color: #fff;">MEDIUM</span>
+      Sensitive subdomain: dev.deswik-conference.3cssoftware.com.au
+    </div>
+    <div class="finding-detail">Subdomain &#x27;dev.deswik-conference.3cssoftware.com.au&#x27; suggests internal/dev/admin infrastructure exposed via DNS. Attackers enumerate these first.</div>
+    <div class="finding-fix">
+      <strong>Remediation:</strong> Remove DNS record if service is internal-only, or restrict access via firewall/VPN.
+    </div>
+  </div>
+
+  <div class="finding-card" style="border-color: #ca8a04">
+    <div class="finding-title">
+      <span class="badge" style="background: #ca8a04; color: #fff;">MEDIUM</span>
+      Sensitive subdomain: dev-aws.ct.menicon.3cssoftware.com.au
+    </div>
+    <div class="finding-detail">Subdomain &#x27;dev-aws.ct.menicon.3cssoftware.com.au&#x27; suggests internal/dev/admin infrastructure exposed via DNS. Attackers enumerate these first.</div>
+    <div class="finding-fix">
+      <strong>Remediation:</strong> Remove DNS record if service is internal-only, or restrict access via firewall/VPN.
+    </div>
+  </div>
+
+  <div class="finding-card" style="border-color: #ca8a04">
+    <div class="finding-title">
+      <span class="badge" style="background: #ca8a04; color: #fff;">MEDIUM</span>
+      Sensitive subdomain: app.dev.bivacor.3cssoftware.com.au
+    </div>
+    <div class="finding-detail">Subdomain &#x27;app.dev.bivacor.3cssoftware.com.au&#x27; suggests internal/dev/admin infrastructure exposed via DNS. Attackers enumerate these first.</div>
+    <div class="finding-fix">
+      <strong>Remediation:</strong> Remove DNS record if service is internal-only, or restrict access via firewall/VPN.
+    </div>
+  </div>
+
+  <div class="finding-card" style="border-color: #ca8a04">
+    <div class="finding-title">
+      <span class="badge" style="background: #ca8a04; color: #fff;">MEDIUM</span>
+      Sensitive subdomain: admin.dev.deswik-conference.3cssoftware.com.au
+    </div>
+    <div class="finding-detail">Subdomain &#x27;admin.dev.deswik-conference.3cssoftware.com.au&#x27; suggests internal/dev/admin infrastructure exposed via DNS. Attackers enumerate these first.</div>
+    <div class="finding-fix">
+      <strong>Remediation:</strong> Remove DNS record if service is internal-only, or restrict access via firewall/VPN.
+    </div>
+  </div>
+
+  <div class="finding-card" style="border-color: #ca8a04">
+    <div class="finding-title">
+      <span class="badge" style="background: #ca8a04; color: #fff;">MEDIUM</span>
+      Sensitive subdomain: certtest2.3cssoftware.com.au
+    </div>
+    <div class="finding-detail">Subdomain &#x27;certtest2.3cssoftware.com.au&#x27; suggests internal/dev/admin infrastructure exposed via DNS. Attackers enumerate these first.</div>
+    <div class="finding-fix">
+      <strong>Remediation:</strong> Remove DNS record if service is internal-only, or restrict access via firewall/VPN.
+    </div>
+  </div>
+
+  <div class="finding-card" style="border-color: #ca8a04">
+    <div class="finding-title">
+      <span class="badge" style="background: #ca8a04; color: #fff;">MEDIUM</span>
+      Sensitive subdomain: www.dev.deswik-website.3cssoftware.com.au
+    </div>
+    <div class="finding-detail">Subdomain &#x27;www.dev.deswik-website.3cssoftware.com.au&#x27; suggests internal/dev/admin infrastructure exposed via DNS. Attackers enumerate these first.</div>
+    <div class="finding-fix">
+      <strong>Remediation:</strong> Remove DNS record if service is internal-only, or restrict access via firewall/VPN.
+    </div>
+  </div>
+
+  <div class="finding-card" style="border-color: #ca8a04">
+    <div class="finding-title">
+      <span class="badge" style="background: #ca8a04; color: #fff;">MEDIUM</span>
+      Sensitive subdomain: public-api.dev.mykidsvision.3cssoftware.com.au
+    </div>
+    <div class="finding-detail">Subdomain &#x27;public-api.dev.mykidsvision.3cssoftware.com.au&#x27; suggests internal/dev/admin infrastructure exposed via DNS. Attackers enumerate these first.</div>
+    <div class="finding-fix">
+      <strong>Remediation:</strong> Remove DNS record if service is internal-only, or restrict access via firewall/VPN.
+    </div>
+  </div>
+
+  <div class="finding-card" style="border-color: #ca8a04">
+    <div class="finding-title">
+      <span class="badge" style="background: #ca8a04; color: #fff;">MEDIUM</span>
+      Sensitive subdomain: mailer.dev.deswik-conference.3cssoftware.com.au
+    </div>
+    <div class="finding-detail">Subdomain &#x27;mailer.dev.deswik-conference.3cssoftware.com.au&#x27; suggests internal/dev/admin infrastructure exposed via DNS. Attackers enumerate these first.</div>
+    <div class="finding-fix">
+      <strong>Remediation:</strong> Remove DNS record if service is internal-only, or restrict access via firewall/VPN.
+    </div>
+  </div>
+
+  <div class="finding-card" style="border-color: #ca8a04">
+    <div class="finding-title">
+      <span class="badge" style="background: #ca8a04; color: #fff;">MEDIUM</span>
+      Sensitive subdomain: certtest1.3cssoftware.com.au
+    </div>
+    <div class="finding-detail">Subdomain &#x27;certtest1.3cssoftware.com.au&#x27; suggests internal/dev/admin infrastructure exposed via DNS. Attackers enumerate these first.</div>
+    <div class="finding-fix">
+      <strong>Remediation:</strong> Remove DNS record if service is internal-only, or restrict access via firewall/VPN.
+    </div>
+  </div>
+
+  <div class="finding-card" style="border-color: #ca8a04">
+    <div class="finding-title">
+      <span class="badge" style="background: #ca8a04; color: #fff;">MEDIUM</span>
+      HTTP Does Not Redirect to HTTPS
+    </div>
+    <div class="finding-detail">http:// version of the site does not redirect to https://. Users accessing via HTTP send data unencrypted.</div>
+    <div class="finding-fix">
+      <strong>Remediation:</strong> Add HTTP→HTTPS redirect (301) in web server config.
+    </div>
+  </div>
+
+  <div class="finding-card" style="border-color: #ca8a04">
+    <div class="finding-title">
+      <span class="badge" style="background: #ca8a04; color: #fff;">MEDIUM</span>
+      Missing CSP
+    </div>
+    <div class="finding-detail">Missing CSP — vulnerable to XSS injection</div>
+    <div class="finding-fix">
+      <strong>Remediation:</strong> Add &#x27;Content-Security-Policy&#x27; header to server response.
+    </div>
+  </div>
+
+  <div class="finding-card" style="border-color: #ca8a04">
+    <div class="finding-title">
+      <span class="badge" style="background: #ca8a04; color: #fff;">MEDIUM</span>
+      Missing X-Frame-Options
+    </div>
+    <div class="finding-detail">Missing X-Frame-Options — clickjacking possible</div>
+    <div class="finding-fix">
+      <strong>Remediation:</strong> Add &#x27;X-Frame-Options&#x27; header to server response.
+    </div>
+  </div>
+
+  <div class="finding-card" style="border-color: #2563eb">
+    <div class="finding-title">
+      <span class="badge" style="background: #2563eb; color: #fff;">LOW</span>
+      Missing X-Content-Type-Options
+    </div>
+    <div class="finding-detail">Missing X-Content-Type-Options — MIME sniffing risk</div>
+    <div class="finding-fix">
+      <strong>Remediation:</strong> Add &#x27;X-Content-Type-Options&#x27; header to server response.
+    </div>
+  </div>
+
+  <div class="finding-card" style="border-color: #2563eb">
+    <div class="finding-title">
+      <span class="badge" style="background: #2563eb; color: #fff;">LOW</span>
+      Missing X-XSS-Protection
+    </div>
+    <div class="finding-detail">Missing X-XSS-Protection — legacy XSS filter disabled</div>
+    <div class="finding-fix">
+      <strong>Remediation:</strong> Add &#x27;X-XSS-Protection&#x27; header to server response.
+    </div>
+  </div>
+
+  <div class="finding-card" style="border-color: #2563eb">
+    <div class="finding-title">
+      <span class="badge" style="background: #2563eb; color: #fff;">LOW</span>
+      Missing Referrer-Policy
+    </div>
+    <div class="finding-detail">Missing Referrer-Policy — leaks URL info to third parties</div>
+    <div class="finding-fix">
+      <strong>Remediation:</strong> Add &#x27;Referrer-Policy&#x27; header to server response.
+    </div>
+  </div>
+
+  <div class="finding-card" style="border-color: #2563eb">
+    <div class="finding-title">
+      <span class="badge" style="background: #2563eb; color: #fff;">LOW</span>
+      Missing Permissions-Policy
+    </div>
+    <div class="finding-detail">Missing Permissions-Policy — browser features unrestricted</div>
+    <div class="finding-fix">
+      <strong>Remediation:</strong> Add &#x27;Permissions-Policy&#x27; header to server response.
+    </div>
+  </div>
+
+  <div class="finding-card" style="border-color: #2563eb">
+    <div class="finding-title">
+      <span class="badge" style="background: #2563eb; color: #fff;">LOW</span>
+      Information Disclosure: Server: Microsoft-IIS/10.0
+    </div>
+    <div class="finding-detail">Server header reveals software/version — aids targeted attacks</div>
+    <div class="finding-fix">
+      <strong>Remediation:</strong> Remove or obfuscate the &#x27;Server&#x27; header.
+    </div>
+  </div>
+
+  <div class="finding-card" style="border-color: #2563eb">
+    <div class="finding-title">
+      <span class="badge" style="background: #2563eb; color: #fff;">LOW</span>
+      Information Disclosure: X-Powered-By: ASP.NET
+    </div>
+    <div class="finding-detail">X-Powered-By reveals backend technology — aids targeted attacks</div>
+    <div class="finding-fix">
+      <strong>Remediation:</strong> Remove or obfuscate the &#x27;X-Powered-By&#x27; header.
+    </div>
+  </div>
+
+  <div class="finding-card" style="border-color: #2563eb">
+    <div class="finding-title">
+      <span class="badge" style="background: #2563eb; color: #fff;">LOW</span>
+      Information Disclosure: X-AspNet-Version: 4.0.30319
+    </div>
+    <div class="finding-detail">ASP.NET version disclosed — aids targeted attacks</div>
+    <div class="finding-fix">
+      <strong>Remediation:</strong> Remove or obfuscate the &#x27;X-AspNet-Version&#x27; header.
+    </div>
+  </div>
+
+  <h2>Open Ports &amp; Services</h2>
+  <table class="port-table">
+    <tr><th>Port</th><th>Service</th><th>Product</th><th>Version</th></tr>
+    <tr><td>21/tcp</td><td>ftp</td><td></td><td></td></tr>
+    <tr><td>80/tcp</td><td>http</td><td></td><td></td></tr>
+    <tr><td>443/tcp</td><td>https</td><td></td><td></td></tr>
+    <tr><td>554/tcp</td><td>rtsp</td><td></td><td></td></tr>
+    <tr><td>1723/tcp</td><td>tcpwrapped</td><td></td><td></td></tr>
+  </table>
+  <h2>Subdomains (61)</h2>
+  <ul class="subdomain-list">
+    <li>3cssoftware.com.au</li>
+    <li>3cssoftware.lensorders.3cssoftware.com.au</li>
+    <li>admin.bgh.3cssoftware.com.au</li>
+    <li>admin.deswik-website.3cssoftware.com.au</li>
+    <li>admin.dev.deswik-conference.3cssoftware.com.au</li>
+    <li>admin.dev.deswik-website.3cssoftware.com.au</li>
+    <li>admin.dev.hyne.3cssoftware.com.au</li>
+    <li>admin.dev.knocknock.3cssoftware.com.au</li>
+    <li>admin.dev.qco-riskmanager.3cssoftware.com.au</li>
+    <li>admin.hyne.3cssoftware.com.au</li>
+    <li>api.dev-aws.ct.menicon.3cssoftware.com.au</li>
+    <li>api.dev.ct.menicon.3cssoftware.com.au</li>
+    <li>api.dev.deswik-conference.3cssoftware.com.au</li>
+    <li>api.dev.mykidsvision.3cssoftware.com.au</li>
+    <li>api.mobile.dev.deswik-conference.3cssoftware.com.au</li>
+    <li>app.bivacor.3cssoftware.com.au</li>
+    <li>app.dev.bivacor.3cssoftware.com.au</li>
+    <li>app.dev.hyne.3cssoftware.com.au</li>
+    <li>app.dev.jbu.3cssoftware.com.au</li>
+    <li>app.dev.knocknock.3cssoftware.com.au</li>
+    <li>app.dev.mibo-riskregister.3cssoftware.com.au</li>
+    <li>app.dev.qco-riskmanager.3cssoftware.com.au</li>
+    <li>app.dev.witzer.3cssoftware.com.au</li>
+    <li>app.hyne.3cssoftware.com.au</li>
+    <li>app.jbu.3cssoftware.com.au</li>
+    <li>app.lensorders.3cssoftware.com.au</li>
+    <li>app.mibo-riskregister.3cssoftware.com.au</li>
+    <li>auth.dev-aws.ct.menicon.3cssoftware.com.au</li>
+    <li>auth.dev.ct.menicon.3cssoftware.com.au</li>
+    <li>auth.dev.deswik-conference.3cssoftware.com.au</li>
+    <li>auth.dev.mykidsvision.3cssoftware.com.au</li>
+    <li>bgh-admin-prod.3cssoftware.com.au</li>
+    <li>bgh-admin-staging.3cssoftware.com.au</li>
+    <li>bgh-prod-admin.3cssoftware.com.au</li>
+    <li>bgh-prod.3cssoftware.com.au</li>
+    <li>bgh-staging.3cssoftware.com.au</li>
+    <li>bgh.3cssoftware.com.au</li>
+    <li>certtest1.3cssoftware.com.au</li>
+    <li>certtest2.3cssoftware.com.au</li>
+    <li>deswik-crm.3cssoftware.com.au</li>
+    <li>dev-aws.ct.menicon.3cssoftware.com.au</li>
+    <li>dev.ct.menicon.3cssoftware.com.au</li>
+    <li>dev.deswik-conference.3cssoftware.com.au</li>
+    <li>dev.mykidsvision.3cssoftware.com.au</li>
+    <li>eyefit.3cssoftware.com.au</li>
+    <li>homecloudpi.mansfield.3cssoftware.com.au</li>
+    <li>lensorders.3cssoftware.com.au</li>
+    <li>mailer.dev-aws.ct.menicon.3cssoftware.com.au</li>
+    <li>mailer.dev.ct.menicon.3cssoftware.com.au</li>
+    <li>mailer.dev.deswik-conference.3cssoftware.com.au</li>
+    <li><em>... and 11 more</em></li>
+  </ul>
+  <h2>DNS Configuration</h2>
+  <div class="meta">
+    <strong>zone_transfer:</strong> TIMEOUT<br>
+    <strong>dkim:</strong> NOT_FOUND (common selectors checked)<br>
+  </div>
+  <h2>TLS/SSL Configuration</h2>
+  <div class="meta">
+    <strong>version:</strong> TLSv1.3<br>
+    <strong>cipher:</strong> [&#x27;TLS_AES_256_GCM_SHA384&#x27;, &#x27;TLSv1.3&#x27;, 256]<br>
+    <strong>cert_expiry:</strong> Aug 18 23:59:59 2026 GMT<br>
+    <strong>cert_days_left:</strong> 119<br>
+    <strong>san_count:</strong> 1<br>
+    <strong>http_redirect:</strong> False<br>
+  </div>
+
+  <h2>Next Steps</h2>
+  <div class="section-summary">
+    <ol style="margin-left: 20px;">
+      <li style="margin: 8px 0;"><strong>Critical findings first</strong> — address any CRITICAL severity items immediately.</li>
+      <li style="margin: 8px 0;"><strong>Close unnecessary ports</strong> — if a service doesn't need to be public, firewall it.</li>
+      <li style="margin: 8px 0;"><strong>Update software</strong> — patch any outdated services flagged above.</li>
+      <li style="margin: 8px 0;"><strong>Add security headers</strong> — quick wins that harden your web presence.</li>
+      <li style="margin: 8px 0;"><strong>Configure email security</strong> — SPF, DKIM, and DMARC prevent domain spoofing.</li>
+      <li style="margin: 8px 0;"><strong>Schedule recurring scans</strong> — new vulnerabilities appear constantly. Monthly monitoring catches them early.</li>
+    </ol>
+  </div>
+
+  <div style="background: linear-gradient(135deg, #1e40af, #7c3aed); border-radius: 12px; padding: 28px; margin: 32px 0; text-align: center;">
+    <div style="font-family: Georgia, serif; font-size: 20px; color: #fff; margin-bottom: 8px;">Continuous Monitoring</div>
+    <p style="color: #c7d2fe; font-size: 14px; margin-bottom: 16px;">
+      Get monthly automated scans with change detection.<br>
+      Know the moment a new vulnerability appears.
+    </p>
+    <p style="color: #a5b4fc; font-size: 14px;">$1,500/month &bull; Cancel anytime</p>
+  </div>
+
+  <div class="footer">
+    <strong>CONFIDENTIAL</strong> — This report is intended for 3cssoftware.com.au administrators only.<br>
+    Passive reconnaissance only. No systems were accessed, tested, or modified.<br>
+    &copy; 2026 Titanos Security
+  </div>
+</div>
+</body>
+</html>
