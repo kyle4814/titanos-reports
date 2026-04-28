@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex,nofollow">
+<meta name="googlebot" content="noindex,nofollow">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Security Assessment Report — goldenbayair.co.nz</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, 'Helvetica Neue', Helvetica, Arial, sans-serif; background: #0f172a; color: #e2e8f0; line-height: 1.6; }
+  .container { max-width: 720px; margin: 0 auto; padding: 32px 16px; }
+  h1 { font-family: Georgia, 'Times New Roman', serif; font-size: 28px; color: #f8fafc; margin-bottom: 4px; }
+  h2 { font-family: Georgia, 'Times New Roman', serif; font-size: 20px; color: #f8fafc; margin: 36px 0 16px; border-bottom: 1px solid #334155; padding-bottom: 8px; }
+  h3 { font-size: 16px; color: #f8fafc; margin: 24px 0 12px; }
+  .subtitle { color: #94a3b8; font-size: 14px; margin-bottom: 32px; }
+  .meta { background: #1e293b; border-radius: 8px; padding: 16px; margin: 16px 0; font-size: 13px; color: #94a3b8; }
+  .meta strong { color: #e2e8f0; }
+  .score-card { background: #1e293b; border-radius: 12px; padding: 24px; margin: 24px 0; border: 1px solid #334155; }
+  .risk-score { font-size: 48px; font-weight: 700; text-align: center; }
+  .risk-label { text-align: center; font-size: 16px; font-weight: 600; margin-bottom: 12px; }
+  .severity-row { display: flex; justify-content: space-around; margin: 16px 0; }
+  .severity-item { text-align: center; }
+  .severity-count { font-size: 24px; font-weight: 700; }
+  .severity-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #94a3b8; }
+  .finding-card { background: #1e293b; border-radius: 8px; padding: 20px; margin: 16px 0; border-left: 4px solid; }
+  .finding-title { font-weight: 600; font-size: 15px; margin-bottom: 8px; }
+  .finding-detail { font-size: 14px; color: #cbd5e1; margin-bottom: 12px; }
+  .finding-fix { font-size: 14px; color: #a5f3fc; background: #0c1a2e; padding: 12px; border-radius: 6px; border-left: 3px solid #06b6d4; }
+  .finding-fix strong { color: #22d3ee; }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+  .port-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 13px; }
+  .port-table th { background: #1e293b; padding: 8px 12px; text-align: left; color: #94a3b8; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; }
+  .port-table td { padding: 8px 12px; border-bottom: 1px solid #1e293b; }
+  .subdomain-list { font-size: 13px; color: #94a3b8; column-count: 2; column-gap: 24px; margin: 12px 0; }
+  .subdomain-list li { margin: 2px 0; }
+  .section-summary { background: #1e293b; border-radius: 8px; padding: 16px; margin: 16px 0; font-size: 14px; }
+  .footer { text-align: center; color: #475569; font-size: 12px; margin-top: 48px; padding-top: 20px; border-top: 1px solid #1e293b; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Security Assessment Report</h1>
+  <p class="subtitle">goldenbayair.co.nz</p>
+
+  <div class="meta">
+    <strong>Scan Date:</strong> 2026-04-23<br>
+    <strong>Target IP:</strong> 43.245.53.43<br>
+    <strong>Scan ID:</strong> c4e421dbd9be<br>
+    <strong>Duration:</strong> 32.7s<br>
+    <strong>Method:</strong> Passive reconnaissance + banner grab (no exploitation, no auth testing)
+  </div>
+
+  <div class="score-card">
+    <div class="risk-label" style="color: #dc2626">OVERALL RISK</div>
+    <div class="risk-score" style="color: #dc2626">F</div>
+    <div class="severity-row">
+      <div class="severity-item">
+        <div class="severity-count" style="color: #dc2626">1</div>
+        <div class="severity-label">Critical</div>
+      </div>
+      <div class="severity-item">
+        <div class="severity-count" style="color: #ea580c">5</div>
+        <div class="severity-label">High</div>
+      </div>
+      <div class="severity-item">
+        <div class="severity-count" style="color: #ca8a04">5</div>
+        <div class="severity-label">Medium</div>
+      </div>
+      <div class="severity-item">
+        <div class="severity-count" style="color: #2563eb">6</div>
+        <div class="severity-label">Low</div>
+      </div>
+    </div>
+  </div>
+
+  <h2>Executive Summary</h2>
+  <div class="section-summary">
+    A passive security assessment of <strong>goldenbayair.co.nz</strong> (43.245.53.43) revealed <strong>17 findings</strong> across 13 open ports and 0 subdomains. Overall risk grade: <strong style='color: #dc2626'>F</strong>.<br><br><strong>1 critical vulnerabilities</strong> were identified that require immediate attention. These represent high-risk exposure points that could allow unauthorized access or data breach. <strong>5 high-severity issues</strong> were found that should be addressed within the next 7 days. 5 medium-severity findings were noted for near-term remediation. 6 low-severity items represent best-practice improvements.
+  </div>
+  <h2>Findings</h2>
+
+  <div class="finding-card" style="border-color: #dc2626">
+    <div class="finding-title">
+      <span class="badge" style="background: #dc2626; color: #fff;">CRITICAL</span>
+      Port 3306/tcp (MySQL) Open
+    </div>
+    <div class="finding-detail">MySQL exposed — database directly accessible. Detected service: MySQL.</div>
+    <div class="finding-fix">
+      <strong>Remediation:</strong> Close port 3306 or restrict access to trusted IPs via firewall. If required, ensure MySQL is patched and properly authenticated.
+    </div>
+  </div>
+
+  <div class="finding-card" style="border-color: #ea580c">
+    <div class="finding-title">
+      <span class="badge" style="background: #ea580c; color: #fff;">HIGH</span>
+      Port 21/tcp (FTP) Open
+    </div>
+    <div class="finding-detail">FTP exposed — cleartext credentials, anonymous access risk. Detected service: Pure-FTPd.</div>
+    <div class="finding-fix">
+      <strong>Remediation:</strong> Close port 21 or restrict access to trusted IPs via firewall. If required, ensure FTP is patched and properly authenticated.
+    </div>
+  </div>
+
+  <div class="finding-card" style="border-color: #ea580c">
+    <div class="finding-title">
+      <span class="badge" style="background: #ea580c; color: #fff;">HIGH</span>
+      Outdated OpenSSH 7.4 on port 22
+    </div>
+    <div class="finding-detail">OpenSSH &lt; 8.0 has multiple vulnerabilities</div>
+    <div class="finding-fix">
+      <strong>Remediation:</strong> Update OpenSSH to latest stable version.
+    </div>
+  </div>
+
+  <div class="finding-card" style="border-color: #ea580c">
+    <div class="finding-title">
+      <span class="badge" style="background: #ea580c; color: #fff;">HIGH</span>
+      Port 110/tcp (POP3) Open
+    </div>
+    <div class="finding-detail">POP3 exposed — cleartext email retrieval. Detected service: Dovecot pop3d.</div>
+    <div class="finding-fix">
+      <strong>Remediation:</strong> Close port 110 or restrict access to trusted IPs via firewall. If required, ensure POP3 is patched and properly authenticated.
+    </div>
+  </div>
+
+  <div class="finding-card" style="border-color: #ea580c">
+    <div class="finding-title">
+      <span class="badge" style="background: #ea580c; color: #fff;">HIGH</span>
+      CVE-2016-10009 — OpenSSH 7.4 (CVSS 7.3)
+    </div>
+    <div class="finding-detail">Untrusted search path vulnerability in ssh-agent.c in ssh-agent in OpenSSH before 7.4 allows remote attackers to execute arbitrary local PKCS#11 modules by leveraging control over a forwarded agent-socket.</div>
+    <div class="finding-fix">
+      <strong>Remediation:</strong> Update OpenSSH to latest version. See https://nvd.nist.gov/vuln/detail/CVE-2016-10009
+    </div>
+  </div>
+
+  <div class="finding-card" style="border-color: #ea580c">
+    <div class="finding-title">
+      <span class="badge" style="background: #ea580c; color: #fff;">HIGH</span>
+      CVE-2016-10010 — OpenSSH 7.4 (CVSS 7.0)
+    </div>
+    <div class="finding-detail">sshd in OpenSSH before 7.4, when privilege separation is not used, creates forwarded Unix-domain sockets as root, which might allow local users to gain privileges via unspecified vectors, related to serverloop.c.</div>
+    <div class="finding-fix">
+      <strong>Remediation:</strong> Update OpenSSH to latest version. See https://nvd.nist.gov/vuln/detail/CVE-2016-10010
+    </div>
+  </div>
+
+  <div class="finding-card" style="border-color: #ca8a04">
+    <div class="finding-title">
+      <span class="badge" style="background: #ca8a04; color: #fff;">MEDIUM</span>
+      HTTP Does Not Redirect to HTTPS
+    </div>
+    <div class="finding-detail">http:// version of the site does not redirect to https://. Users accessing via HTTP send data unencrypted.</div>
+    <div class="finding-fix">
+      <strong>Remediation:</strong> Add HTTP→HTTPS redirect (301) in web server config.
+    </div>
+  </div>
+
+  <div class="finding-card" style="border-color: #ca8a04">
+    <div class="finding-title">
+      <span class="badge" style="background: #ca8a04; color: #fff;">MEDIUM</span>
+      Missing CSP
+    </div>
+    <div class="finding-detail">Missing CSP — vulnerable to XSS injection</div>
+    <div class="finding-fix">
+      <strong>Remediation:</strong> Add &#x27;Content-Security-Policy&#x27; header to server response.
+    </div>
+  </div>
+
+  <div class="finding-card" style="border-color: #ca8a04">
+    <div class="finding-title">
+      <span class="badge" style="background: #ca8a04; color: #fff;">MEDIUM</span>
+      Missing X-Frame-Options
+    </div>
+    <div class="finding-detail">Missing X-Frame-Options — clickjacking possible</div>
+    <div class="finding-fix">
+      <strong>Remediation:</strong> Add &#x27;X-Frame-Options&#x27; header to server response.
+    </div>
+  </div>
+
+  <div class="finding-card" style="border-color: #ca8a04">
+    <div class="finding-title">
+      <span class="badge" style="background: #ca8a04; color: #fff;">MEDIUM</span>
+      Port 22/tcp (SSH) Open
+    </div>
+    <div class="finding-detail">SSH exposed — brute force target, check for password auth. Detected service: OpenSSH 7.4.</div>
+    <div class="finding-fix">
+      <strong>Remediation:</strong> Close port 22 or restrict access to trusted IPs via firewall. If required, ensure SSH is patched and properly authenticated.
+    </div>
+  </div>
+
+  <div class="finding-card" style="border-color: #ca8a04">
+    <div class="finding-title">
+      <span class="badge" style="background: #ca8a04; color: #fff;">MEDIUM</span>
+      Port 143/tcp (IMAP) Open
+    </div>
+    <div class="finding-detail">IMAP exposed — cleartext email access. Detected service: Dovecot imapd.</div>
+    <div class="finding-fix">
+      <strong>Remediation:</strong> Close port 143 or restrict access to trusted IPs via firewall. If required, ensure IMAP is patched and properly authenticated.
+    </div>
+  </div>
+
+  <div class="finding-card" style="border-color: #2563eb">
+    <div class="finding-title">
+      <span class="badge" style="background: #2563eb; color: #fff;">LOW</span>
+      Missing X-Content-Type-Options
+    </div>
+    <div class="finding-detail">Missing X-Content-Type-Options — MIME sniffing risk</div>
+    <div class="finding-fix">
+      <strong>Remediation:</strong> Add &#x27;X-Content-Type-Options&#x27; header to server response.
+    </div>
+  </div>
+
+  <div class="finding-card" style="border-color: #2563eb">
+    <div class="finding-title">
+      <span class="badge" style="background: #2563eb; color: #fff;">LOW</span>
+      Missing X-XSS-Protection
+    </div>
+    <div class="finding-detail">Missing X-XSS-Protection — legacy XSS filter disabled</div>
+    <div class="finding-fix">
+      <strong>Remediation:</strong> Add &#x27;X-XSS-Protection&#x27; header to server response.
+    </div>
+  </div>
+
+  <div class="finding-card" style="border-color: #2563eb">
+    <div class="finding-title">
+      <span class="badge" style="background: #2563eb; color: #fff;">LOW</span>
+      Missing Referrer-Policy
+    </div>
+    <div class="finding-detail">Missing Referrer-Policy — leaks URL info to third parties</div>
+    <div class="finding-fix">
+      <strong>Remediation:</strong> Add &#x27;Referrer-Policy&#x27; header to server response.
+    </div>
+  </div>
+
+  <div class="finding-card" style="border-color: #2563eb">
+    <div class="finding-title">
+      <span class="badge" style="background: #2563eb; color: #fff;">LOW</span>
+      Missing Permissions-Policy
+    </div>
+    <div class="finding-detail">Missing Permissions-Policy — browser features unrestricted</div>
+    <div class="finding-fix">
+      <strong>Remediation:</strong> Add &#x27;Permissions-Policy&#x27; header to server response.
+    </div>
+  </div>
+
+  <div class="finding-card" style="border-color: #2563eb">
+    <div class="finding-title">
+      <span class="badge" style="background: #2563eb; color: #fff;">LOW</span>
+      Information Disclosure: Server: Apache/2.4.65 (cPanel) OpenSSL/1.1.1w mod_bwlimited/1.4
+    </div>
+    <div class="finding-detail">Server header reveals software/version — aids targeted attacks</div>
+    <div class="finding-fix">
+      <strong>Remediation:</strong> Remove or obfuscate the &#x27;Server&#x27; header.
+    </div>
+  </div>
+
+  <div class="finding-card" style="border-color: #2563eb">
+    <div class="finding-title">
+      <span class="badge" style="background: #2563eb; color: #fff;">LOW</span>
+      Information Disclosure: X-Powered-By: PHP/7.1.33
+    </div>
+    <div class="finding-detail">X-Powered-By reveals backend technology — aids targeted attacks</div>
+    <div class="finding-fix">
+      <strong>Remediation:</strong> Remove or obfuscate the &#x27;X-Powered-By&#x27; header.
+    </div>
+  </div>
+
+  <h2>Open Ports &amp; Services</h2>
+  <table class="port-table">
+    <tr><th>Port</th><th>Service</th><th>Product</th><th>Version</th></tr>
+    <tr><td>21/tcp</td><td>ftp</td><td>Pure-FTPd</td><td></td></tr>
+    <tr><td>22/tcp</td><td>ssh</td><td>OpenSSH</td><td>7.4</td></tr>
+    <tr><td>80/tcp</td><td>http</td><td>Apache httpd</td><td>2.4.65</td></tr>
+    <tr><td>110/tcp</td><td>pop3</td><td>Dovecot pop3d</td><td></td></tr>
+    <tr><td>143/tcp</td><td>imap</td><td>Dovecot imapd</td><td></td></tr>
+    <tr><td>443/tcp</td><td>http</td><td>Apache httpd</td><td>2.4.65</td></tr>
+    <tr><td>465/tcp</td><td>smtp</td><td>Exim smtpd</td><td>4.99.1</td></tr>
+    <tr><td>554/tcp</td><td>rtsp</td><td></td><td></td></tr>
+    <tr><td>587/tcp</td><td>smtp</td><td>Exim smtpd</td><td>4.99.1</td></tr>
+    <tr><td>993/tcp</td><td>imaps</td><td></td><td></td></tr>
+    <tr><td>995/tcp</td><td>pop3s</td><td></td><td></td></tr>
+    <tr><td>1723/tcp</td><td>tcpwrapped</td><td></td><td></td></tr>
+    <tr><td>3306/tcp</td><td>mysql</td><td>MySQL</td><td></td></tr>
+  </table>
+  <h2>DNS Configuration</h2>
+  <div class="meta">
+    <strong>zone_transfer:</strong> TIMEOUT<br>
+    <strong>dkim:</strong> NOT_FOUND (common selectors checked)<br>
+  </div>
+  <h2>TLS/SSL Configuration</h2>
+  <div class="meta">
+    <strong>version:</strong> TLSv1.3<br>
+    <strong>cipher:</strong> [&#x27;TLS_AES_256_GCM_SHA384&#x27;, &#x27;TLSv1.3&#x27;, 256]<br>
+    <strong>cert_expiry:</strong> Jul 17 23:59:59 2026 GMT<br>
+    <strong>cert_days_left:</strong> 85<br>
+    <strong>san_count:</strong> 2<br>
+    <strong>http_redirect:</strong> False<br>
+  </div>
+
+  <h2>Next Steps</h2>
+  <div class="section-summary">
+    <ol style="margin-left: 20px;">
+      <li style="margin: 8px 0;"><strong>Critical findings first</strong> — address any CRITICAL severity items immediately.</li>
+      <li style="margin: 8px 0;"><strong>Close unnecessary ports</strong> — if a service doesn't need to be public, firewall it.</li>
+      <li style="margin: 8px 0;"><strong>Update software</strong> — patch any outdated services flagged above.</li>
+      <li style="margin: 8px 0;"><strong>Add security headers</strong> — quick wins that harden your web presence.</li>
+      <li style="margin: 8px 0;"><strong>Configure email security</strong> — SPF, DKIM, and DMARC prevent domain spoofing.</li>
+      <li style="margin: 8px 0;"><strong>Schedule recurring scans</strong> — new vulnerabilities appear constantly. Monthly monitoring catches them early.</li>
+    </ol>
+  </div>
+
+  <div style="background: linear-gradient(135deg, #1e40af, #7c3aed); border-radius: 12px; padding: 28px; margin: 32px 0; text-align: center;">
+    <div style="font-family: Georgia, serif; font-size: 20px; color: #fff; margin-bottom: 8px;">Continuous Monitoring</div>
+    <p style="color: #c7d2fe; font-size: 14px; margin-bottom: 16px;">
+      Get monthly automated scans with change detection.<br>
+      Know the moment a new vulnerability appears.
+    </p>
+    <p style="color: #a5b4fc; font-size: 14px;">$1,500/month &bull; Cancel anytime</p>
+  </div>
+
+  <div class="footer">
+    <strong>CONFIDENTIAL</strong> — This report is intended for goldenbayair.co.nz administrators only.<br>
+    Passive reconnaissance only. No systems were accessed, tested, or modified.<br>
+    &copy; 2026 Titanos Security
+  </div>
+</div>
+</body>
+</html>
